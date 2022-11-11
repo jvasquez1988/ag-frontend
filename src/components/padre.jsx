@@ -96,6 +96,7 @@ export default function Padre() {
           setUserDetail={setUserDetail}
         />
       )}
+      
       <Row>
         <Col span={18} push={6}>
           <div>
@@ -114,14 +115,19 @@ export default function Padre() {
             />
           </div>
         </Col>
+
         <Col span={6} pull={18}>
-          {UserDetail.lastname && (
+        <div className="hijo2">
+        {UserDetail.lastname && (
             <div>
               <Hijo2 data={UserDetail}></Hijo2>
             </div>
-          )}
+          )}          
+          </div>
+
         </Col>
-      </Row>
+      </Row>       
+
     </div>
   );
 }
