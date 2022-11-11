@@ -19,7 +19,7 @@ export function NuevoUsuarioComponent({
         age: parseInt(e.age, 10),
       },
       (a) => {
-        message.success("Se ha actualizado de forma correcta");
+        message.success("Se ha creado de forma correcta");
         setUserDetail();
         setUserDetail(a.createUser);
         refreshData();
