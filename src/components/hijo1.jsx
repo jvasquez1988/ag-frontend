@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Table, Button, Avatar } from "antd";
-import { EditOutlined } from "@ant-design/icons";
+import { Table, Button, Avatar, message } from "antd";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { UserService } from "../services/user.service";
 
 export default function Hijo1(
   UserList,
@@ -9,13 +10,16 @@ export default function Hijo1(
   isLoading,
   setPagination,
   total,
-  otro
+  otro,
+  setUserDetail,
+  refreshData
 ) {
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   //console.log(UserList);
   onClick = UserList.onClick;
-
+  refreshData = UserList.refreshData;
   const handleTableChange = (pagination) => {
     setCurrentPage(pagination.current);
     const newPagination = {
@@ -30,6 +34,27 @@ export default function Hijo1(
     total: total,
   };
 
+  console.log(refreshData);
+
+  const disabledUser = (id) => {
+    setLoading(true);
+
+    UserService.deleteUser(
+      id,
+      (a) => {
+        message.success("Borrado con exito");
+        setUserDetail(a);
+        refreshData();
+        setLoading(false);
+      },
+      (e) => {
+        //message.error("Por favor intente más tarde");
+        refreshData();
+        setLoading(false);
+      }
+    );
+  };
+
   const columnas = [
     {
       title: "Action",
@@ -39,17 +64,38 @@ export default function Hijo1(
       width: "5%",
       render: ({ item, index }) => {
         return (
-          <Button
-            className="btn  btn-sm btn-danger"
-            style={{ color: "red", alignItems: "center", display: "flex" }}
-            title="Editar"
-            onClick={() => {
-              //console.log("Actuando con undefined");
-              onClick && onClick(item, index);
-            }}
-          >
-            <Avatar size="small" icon={<EditOutlined />} />
-          </Button>
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <Button
+                    className="btn  btn-sm btn-danger"
+                    style={{
+                      color: "red",
+                      alignItems: "center",
+                      display: "flex",
+                    }}
+                    title="Editar"
+                    onClick={() => {
+                      //console.log("Actuando con undefined");
+                      onClick && onClick(item, index);
+                    }}
+                  >
+                    <Avatar size="small" icon={<EditOutlined />} />
+                  </Button>
+                </td>
+                <td>
+                  <Button
+                    title="Borrar"
+                    onClick={() => disabledUser(item._id)}
+                    className="btn  btn-sm btn-danger"
+                  >
+                    <DeleteOutlined />
+                  </Button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         );
       },
     },

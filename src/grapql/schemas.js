@@ -21,3 +21,23 @@ mutation updateUser($id:ID, $input:UserInput){
    }
  }
 `
+export const createUser = gql`
+mutation createUser($UserInput:UserInput){
+  createUser(input:$UserInput){
+   _id
+   firstname
+   lastname
+   age
+ }
+}
+`
+export const deleteUser = gql`
+mutation deleteUser($id:ID){
+  deleteUser(_id:$id){
+   _id
+   firstname
+   lastname
+   age
+ }
+}
+`

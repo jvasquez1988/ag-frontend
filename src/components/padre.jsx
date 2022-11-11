@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
 import "antd/dist/antd.css";
-import { Col, Row } from "antd";
+import { Button, Col, Row } from "antd";
 import { UserService } from "../services/user.service";
 import { message } from "antd";
 
 import { UserDetailsComponent } from "./user.details.component";
 import Hijo1 from "./hijo1";
 import Hijo2 from "./hijo2";
+import { NuevoUsuarioComponent } from "./nuevo.usuario";
 export default function Padre() {
   const [isLoading, setIsLoading] = useState(false);
   const [UserList, setUserList] = useState([]);
   const [pagination, setPagination] = useState({ start: 0, limit: 10 });
   const [isUserDetailVisible, setIsUserDetailVisible] = useState(false);
   const [UserDetail, setUserDetail] = useState({});
+  const [isCreateUserVisible, setIsCreateUserVisible] = useState(false);
 
   const refreshData = () => {
     setIsLoading(true);
@@ -43,6 +45,10 @@ export default function Padre() {
     //console.log(UserDetail);
   };
 
+  const onClickCreateUser = () => {
+    setIsCreateUserVisible(true);
+  };
+
   const handleOnCloseUserDetail = ({ isRestart, userData }) => {
     setIsUserDetailVisible(false);
     setUserDetail(userData);
@@ -60,6 +66,24 @@ export default function Padre() {
       <nav>
         <span>Bienvenidos a mi prueba (Graphql + MongoDB)</span>
       </nav>
+      <br />
+      <Button
+        type="primary"
+        className="btn btn-sm btn-primary"
+        onClick={onClickCreateUser}
+      >
+        Crear nuevo usuario
+      </Button>
+      {isCreateUserVisible && (
+        <NuevoUsuarioComponent
+          visible={isCreateUserVisible}
+          onClose={() => {
+            setIsCreateUserVisible(false);
+          }}
+          refreshData={refreshData}
+          setUserDetail={setUserDetail}
+        ></NuevoUsuarioComponent>
+      )}
       {isUserDetailVisible && (
         <UserDetailsComponent
           visible={isUserDetailVisible}
@@ -85,6 +109,8 @@ export default function Padre() {
               }}
               total={10}
               otro={onClickRow}
+              setUserDetail={setUserDetail}
+              refreshData={refreshData}
             />
           </div>
         </Col>
