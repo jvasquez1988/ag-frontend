@@ -64,7 +64,7 @@ export default function Padre() {
   return (
     <div>
       <nav>
-        <span>Bienvenidos a mi prueba (Graphql + MongoDB)</span>
+        <span>Bienvenidos a mi prueba (React + Node.js + express + Graphql + MongoDB)</span>
       </nav>
       <br />
       <Button
