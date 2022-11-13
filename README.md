@@ -14,7 +14,7 @@ Runs the app in the development mode.\
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### This app is working with node.js APIs Graphql.
+### This app is working with node.js APIs Graphql (Backend)
 
 ### Please, do not forget `npm install`
 
