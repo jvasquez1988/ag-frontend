@@ -12,9 +12,9 @@ Runs the app in the development mode.\
 .env
 
 The page will reload when you make changes.\
-You may also see any lint errors in the console.
+You may also see any lint errors in the console.\
 
-### This app is working with node.js APIs Graphql (Backend)
+This app is working with node.js APIs Graphql (Backend)\
 
-### Please, do not forget `npm install`
+Please, do not forget run `npm install` 
 

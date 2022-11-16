@@ -2,7 +2,7 @@ import { ConnectionService } from "../connection/connection";
 import { updateUser, Users, createUser, deleteUser } from "../grapql/schemas";
 export class UserService {
   static getMongoUsers(pagination, res, error) {
-    const client = ConnectionService.getGraphqClientWithJWT();
+    const client = ConnectionService.getGraphqClient();
     client
       .query({
         query: Users,
@@ -22,7 +22,7 @@ export class UserService {
   }
 
   static updateUser(id, User, res, error) {
-    const client = ConnectionService.getGraphqClientWithJWT();
+    const client = ConnectionService.getGraphqClient();
     client
       .mutate({
         mutation: updateUser,
@@ -42,7 +42,7 @@ export class UserService {
 
   static createUser(User, res, error) {
     console.log(User);
-    const client = ConnectionService.getGraphqClientWithJWT();
+    const client = ConnectionService.getGraphqClient();
     client
       .mutate({
         mutation: createUser,
@@ -60,7 +60,7 @@ export class UserService {
   }
 
   static deleteUser(id, res, error) {
-    const client = ConnectionService.getGraphqClientWithJWT();
+    const client = ConnectionService.getGraphqClient();
     client
       .mutate({
         mutation: deleteUser,

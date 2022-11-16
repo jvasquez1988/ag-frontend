@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "antd/dist/antd.css";
+import 'antd/dist/antd.min.css'
 import { Button, Col, Row } from "antd";
 import { UserService } from "../services/user.service";
 import { message } from "antd";
@@ -36,7 +36,22 @@ export default function Padre() {
   };
 
   useEffect(() => {
-    refreshData();
+    setIsLoading(true);
+    setUserList([]);
+    UserService.getMongoUsers(
+      pagination,
+      ({ Users }, res, error) => {
+        //console.log(Users);
+        setUserList(Users);
+        setIsLoading(false);
+      },
+      (e) => {
+        setIsLoading(false);
+
+        //console.log(e)
+        message.error("Ops. An error has ocurred!");
+      }
+    );
   }, [pagination]);
 
   const onClickRow = (data, index) => {

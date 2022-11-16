@@ -34,7 +34,6 @@ export default function Hijo1(
     total: total,
   };
 
-  console.log(refreshData);
 
   const disabledUser = (id) => {
     setLoading(true);
